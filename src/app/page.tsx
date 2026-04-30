@@ -1,10 +1,12 @@
-import Image from "next/image";
-import styles from "./page.module.css";
 import { fetchProducts } from "@/services/productsApi";
 import ProductList from "@/components/ProductList/ProductList";
 
 export default async function Home() {
   const data = await fetchProducts();
+
+  if (!data || !data.products) {
+    return <main><p>Failed to load Products</p></main>
+  }
 
   return <ProductList products={data.products} />;
 }
