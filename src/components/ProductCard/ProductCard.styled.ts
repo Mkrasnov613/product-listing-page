@@ -1,40 +1,49 @@
-"use client"
+"use client";
 
+import { theme } from "@/theme";
 import styled from "styled-components";
 
 const Card = styled.article`
   display: flex;
   flex-direction: column;
-  border: 1px solid #e0e0e0;
+
+  height: 100%;
+  width: 100%;
   border-radius: 8px;
   overflow: hidden;
-  background: white;
+  max-width: 234px;
+  background: ${theme.colors.bg};
+  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.12);
 `;
 
 const ProductImage = styled.div`
   position: relative;
   width: 100%;
-  aspect-ratio: 1;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
 `;
 
 const Body = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 16px;
+  padding: 10px 10px 0px;
   flex: 1;
 `;
 
 const Brand = styled.span`
   font-size: 12px;
-  color: #888;
+  color: ${theme.colors.textMuted};
   text-transform: uppercase;
 `;
 
 const Title = styled.h2`
+  font-family: ${theme.typography.fontFamilyHeading};
+  font-weight: ${theme.typography.fontWeightBold};
+  color: ${theme.colors.textPrimary};
   font-size: 16px;
-  font-weight: 600;
-  margin: 0;
+  margin-bottom: 6px;
+  flex: 1;
 `;
 
 const Description = styled.p`
@@ -44,6 +53,14 @@ const Description = styled.p`
   flex: 1;
 `;
 
+const Footer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-bottom: ${theme.spacing.sm};
+`;
+
 const PriceRow = styled.div`
   display: flex;
   align-items: center;
@@ -51,17 +68,18 @@ const PriceRow = styled.div`
 `;
 
 const OriginalPrice = styled.span<{ hasDiscount: boolean }>`
-  font-size: 16px;
+  font-size: ${theme.typography.fontSizeMedium};
   font-weight: 700;
   text-decoration: ${({ hasDiscount }) =>
     hasDiscount ? "line-through" : "none"};
-  color: ${({ hasDiscount }) => (hasDiscount ? "#aaa" : "#111")};
+  color: ${({ hasDiscount }) =>
+    hasDiscount ? theme.colors.textMuted : theme.colors.textPrimary};
 `;
 
 const DiscountedPrice = styled.span`
   font-size: 16px;
   font-weight: 700;
-  color: #e53935;
+  color: ${theme.colors.accent};
 `;
 
 const PromotionBadge = styled.span`
@@ -71,24 +89,10 @@ const PromotionBadge = styled.span`
   padding: 2px 6px;
   border-radius: 4px;
 `;
-const AddToCartButton = styled.button`
-  margin-top: auto;
-  padding: 10px;
-  background: #111;
-  color: white;
+const BuyButton = styled.button`
+  font-size: ${theme.typography.fontSizeMedium};
+  font-weigth: ${theme.typography.fontWeightBold};
   border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 14px;
-
-  &:hover {
-    background: #333;
-  }
-
-  &:disabled {
-    background: #aaa;
-    cursor: not-allowed;
-  }
 `;
 
 export {
@@ -98,9 +102,10 @@ export {
   Brand,
   Title,
   Description,
+  Footer,
   PriceRow,
   OriginalPrice,
   DiscountedPrice,
   PromotionBadge,
-  AddToCartButton,
+  BuyButton,
 };

@@ -14,8 +14,10 @@ import {
   OriginalPrice,
   DiscountedPrice,
   PromotionBadge,
-  AddToCartButton,
+  Footer,
+  BuyButton,
 } from "./ProductCard.styled";
+import { AddToCart } from "../icons/AddToCart/AddToCart";
 
 interface ProductCardProps {
   product: Product;
@@ -38,32 +40,23 @@ export default function ProductCard({
         <Image
           src={image.url}
           alt={image.altText}
-          width={502}
-          height={502}
-          style={{ objectFit: "cover", color: "black" }}
+          fill
+          style={{ objectFit: "cover" }}
         />
       </ProductImage>
 
       <Body>
         <Brand>{brandName}</Brand>
         <Title>{title}</Title>
-        <Description>{description}</Description>
-
-        <PriceRow>
-          <OriginalPrice hasDiscount={!!promotion}>${price}</OriginalPrice>
-          {discountedPrice && (
-            <DiscountedPrice>${discountedPrice}</DiscountedPrice>
-          )}
-          {promotion && (
-            <PromotionBadge>
-              {promotion.name} -{promotion.percentage}%
-            </PromotionBadge>
-          )}
-        </PriceRow>
-
-        <AddToCartButton onClick={() => onAddToCart()}>
-          Add to cart
-        </AddToCartButton>
+        <Footer>
+          <PriceRow>
+            <OriginalPrice hasDiscount={!!promotion}>${price}</OriginalPrice>
+            {discountedPrice && (
+              <DiscountedPrice>${discountedPrice}</DiscountedPrice>
+            )}
+          </PriceRow>
+            <AddToCart width={24} height={24} />
+        </Footer>
       </Body>
     </Card>
   );
