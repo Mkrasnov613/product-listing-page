@@ -12,5 +12,7 @@ export async function fetchProducts(): Promise<ApiResponse> {
 
   const data: ApiResponse = await response.json();
 
+  console.log(data);
+
   return data;
 }

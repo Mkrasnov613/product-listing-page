@@ -9,10 +9,13 @@ interface ProductListProps {
 }
 
 const Grid = styled.section`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 24px;
-  padding: 32px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  max-width: 820px;
+  gap: 20px 40px;
+  margin: 20px 40px
 `;
 
 export default function ProductList({ products }: ProductListProps) {
