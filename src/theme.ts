@@ -39,4 +39,9 @@ export const theme = {
     md: "8px",
     lg: "12px",
   },
+
+  shadows: {
+    card: "0 2px 8px 0 hsla(223, 73%, 35%, 0.12), 0 1px 3px 0 hsla(223, 73%, 35%, 0.08)",
+    header: "0 2px 12px 0 hsla(223, 73%, 35%, 0.15)",
+  },
 } as const;

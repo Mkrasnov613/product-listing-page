@@ -23,10 +23,7 @@ interface ProductCardProps {
   onAddToCart: () => void;
 }
 
-export default function ProductCard({
-  product,
-  onAddToCart,
-}: ProductCardProps) {
+export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
   const { image, title, description, brandName, price, promotion } = product;
 
   const discountedPrice = promotion
@@ -61,4 +58,4 @@ export default function ProductCard({
       </Body>
     </Card>
   );
-}
+};

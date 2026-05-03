@@ -13,7 +13,7 @@ const Card = styled.article`
   overflow: hidden;
   max-width: 234px;
   background: ${theme.colors.bg};
-  box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.12);
+  box-shadow: ${theme.shadows.card};
 `;
 
 const ProductImage = styled.div`
