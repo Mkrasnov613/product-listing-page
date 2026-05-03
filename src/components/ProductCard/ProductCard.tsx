@@ -9,14 +9,12 @@ import {
   Body,
   Brand,
   Title,
-  Description,
   PriceRow,
   OriginalPrice,
   DiscountedPrice,
   PromotionBadge,
   Footer,
 } from "./ProductCard.styled";
-import { AddToCart } from "../icons/AddToCart/AddToCart";
 
 interface ProductCardProps {
   product: Product;
@@ -25,7 +23,7 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ product, onAddToCart, onSelect }: ProductCardProps) => {
-  const { image, title, description, brandName, price, promotion } = product;
+  const { image, title, brandName, price, promotion } = product;
 
   const discountedPrice = promotion
     ? Math.round(price * (1 - promotion.percentage / 100))

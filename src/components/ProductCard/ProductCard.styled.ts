@@ -33,24 +33,17 @@ const Body = styled.div`
 
 const Brand = styled.span`
   font-size: 12px;
-  line-height: 1;
-  font-family: ${theme.typography.fontFamilyHeading};
+  letter-spacing: 0.6px;
   color: ${theme.colors.textMuted};
   text-transform: uppercase;
 `;
 
 const Title = styled.h2`
   font-weight: ${theme.typography.fontWeightBold};
+  font-family: ${theme.typography.fontFamilyHeading};
   color: ${theme.colors.textPrimary};
   font-size: 16px;
   margin-bottom: 6px;
-  flex: 1;
-`;
-
-const Description = styled.p`
-  font-size: 14px;
-  color: #555;
-  margin: 0;
   flex: 1;
 `;
 
@@ -106,7 +99,6 @@ export {
   Body,
   Brand,
   Title,
-  Description,
   Footer,
   PriceRow,
   OriginalPrice,
