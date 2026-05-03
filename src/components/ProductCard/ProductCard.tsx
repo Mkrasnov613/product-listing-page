@@ -15,7 +15,6 @@ import {
   DiscountedPrice,
   PromotionBadge,
   Footer,
-  BuyButton,
 } from "./ProductCard.styled";
 import { AddToCart } from "../icons/AddToCart/AddToCart";
 
@@ -43,6 +42,9 @@ export default function ProductCard({
           fill
           style={{ objectFit: "cover" }}
         />
+        {promotion && (
+          <PromotionBadge>-{promotion?.percentage}%</PromotionBadge>
+        )}
       </ProductImage>
 
       <Body>
@@ -55,7 +57,6 @@ export default function ProductCard({
               <DiscountedPrice>${discountedPrice}</DiscountedPrice>
             )}
           </PriceRow>
-            <AddToCart width={24} height={24} />
         </Footer>
       </Body>
     </Card>

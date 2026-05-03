@@ -79,20 +79,24 @@ const OriginalPrice = styled.span<{ hasDiscount: boolean }>`
 const DiscountedPrice = styled.span`
   font-size: 16px;
   font-weight: 700;
-  color: ${theme.colors.accent};
+  color: ${theme.colors.textPrimary};
 `;
 
 const PromotionBadge = styled.span`
-  font-size: 12px;
-  background: #e53935;
-  color: white;
-  padding: 2px 6px;
-  border-radius: 4px;
-`;
-const BuyButton = styled.button`
-  font-size: ${theme.typography.fontSizeMedium};
-  font-weigth: ${theme.typography.fontWeightBold};
-  border: none;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 100;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: ${theme.colors.highlight};
+  background: ${theme.colors.primary};
+  border-radius: 50%;
 `;
 
 export {
@@ -107,5 +111,4 @@ export {
   OriginalPrice,
   DiscountedPrice,
   PromotionBadge,
-  BuyButton,
 };
