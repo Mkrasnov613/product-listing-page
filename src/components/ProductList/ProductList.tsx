@@ -2,7 +2,7 @@
 
 import styled from "styled-components";
 import { Product } from "@/types/api";
-import ProductCard from "@/components/ProductCard/ProductCard";
+import { ProductCard } from "@/components/ProductCard/ProductCard";
 
 interface ProductListProps {
   products: Product[];
@@ -15,11 +15,10 @@ const Grid = styled.section`
   align-items: stretch;
   max-width: 820px;
   gap: 20px 40px;
-  margin: 20px 40px
+  margin: 0 auto;
 `;
 
-export default function ProductList({ products }: ProductListProps) {
-
+export const ProductList = ({ products }: ProductListProps) => {
   return (
     <Grid>
       {products.map((product) => (
@@ -31,4 +30,4 @@ export default function ProductList({ products }: ProductListProps) {
       ))}
     </Grid>
   );
-}
+};
