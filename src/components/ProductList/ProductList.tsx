@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import styled from "styled-components";
 import { Product } from "@/types/api";
 import { ProductCard } from "@/components/ProductCard/ProductCard";
+import { ProductModal } from "@/components/ProductModal/ProductModal";
 
 interface ProductListProps {
   products: Product[];
@@ -19,15 +21,24 @@ const Grid = styled.section`
 `;
 
 export const ProductList = ({ products }: ProductListProps) => {
+  const [selected, setSelected] = useState<Product | null>(null);
+
   return (
-    <Grid>
-      {products.map((product) => (
-        <ProductCard
-          key={product.articleNumber}
-          product={product}
-          onAddToCart={() => void 0}
-        />
-      ))}
-    </Grid>
+    <>
+      <Grid>
+        {products.map((product) => (
+          <ProductCard
+            key={product.articleNumber}
+            product={product}
+            onAddToCart={() => void 0}
+            onSelect={() => setSelected(product)}
+          />
+        ))}
+      </Grid>
+
+      {selected && (
+        <ProductModal product={selected} onClose={() => setSelected(null)} />
+      )}
+    </>
   );
 };

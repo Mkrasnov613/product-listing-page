@@ -9,29 +9,28 @@ import {
   Body,
   Brand,
   Title,
-  Description,
   PriceRow,
   OriginalPrice,
   DiscountedPrice,
   PromotionBadge,
   Footer,
 } from "./ProductCard.styled";
-import { AddToCart } from "../icons/AddToCart/AddToCart";
 
 interface ProductCardProps {
   product: Product;
   onAddToCart: () => void;
+  onSelect: () => void;
 }
 
-export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
-  const { image, title, description, brandName, price, promotion } = product;
+export const ProductCard = ({ product, onAddToCart, onSelect }: ProductCardProps) => {
+  const { image, title, brandName, price, promotion } = product;
 
   const discountedPrice = promotion
     ? Math.round(price * (1 - promotion.percentage / 100))
     : null;
 
   return (
-    <Card>
+    <Card onClick={onSelect} style={{ cursor: "pointer" }}>
       <ProductImage>
         <Image
           src={image.url}
