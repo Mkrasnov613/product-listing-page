@@ -21,9 +21,10 @@ import { AddToCart } from "../icons/AddToCart/AddToCart";
 interface ProductCardProps {
   product: Product;
   onAddToCart: () => void;
+  onSelect: () => void;
 }
 
-export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
+export const ProductCard = ({ product, onAddToCart, onSelect }: ProductCardProps) => {
   const { image, title, description, brandName, price, promotion } = product;
 
   const discountedPrice = promotion
@@ -31,7 +32,7 @@ export const ProductCard = ({ product, onAddToCart }: ProductCardProps) => {
     : null;
 
   return (
-    <Card>
+    <Card onClick={onSelect} style={{ cursor: "pointer" }}>
       <ProductImage>
         <Image
           src={image.url}
