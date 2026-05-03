@@ -6,20 +6,30 @@ const HeaderWrapper = styled.header`
   top: 0;
   left: 0;
   width: 100%;
-  height: 64px;
+  height: 80px;
   background: ${theme.colors.bg};
   box-shadow: ${theme.shadows.header};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   z-index: 1000;
+`;
+
+const LogoImage = styled.div`
+  position: relative;
+  width: 200px;
+  height: 48px;
 `;
 
 const Inner = styled.div`
   max-width: 1280px;
   height: 100%;
+  width: 100%;
   margin: 0 auto;
   padding: 0 ${theme.spacing.xl};
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
 `;
 
 const Logo = styled.div`
@@ -67,4 +77,4 @@ const CartCount = styled.span`
   border-radius: 50%;
 `;
 
-export { HeaderWrapper, Inner, Logo, CartButton, CartCount };
+export { HeaderWrapper, Inner, Logo, LogoImage, CartButton, CartCount };
