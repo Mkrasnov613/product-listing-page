@@ -16,7 +16,8 @@ export const theme = {
   },
 
   typography: {
-    fontFamilyHeading: "var(--font-montserrat), sans-serif",
+    fontFamilyHeading: '"FeatureDisplay", sans-serif',
+    fontFamilyBody: '"Roobert", sans-serif',
     fontSizeSmall: "12px",
     fontSizeBase: "14px",
     fontSizeMedium: "16px",

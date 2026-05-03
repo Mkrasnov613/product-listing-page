@@ -33,12 +33,13 @@ const Body = styled.div`
 
 const Brand = styled.span`
   font-size: 12px;
+  line-height: 1;
+  font-family: ${theme.typography.fontFamilyHeading};
   color: ${theme.colors.textMuted};
   text-transform: uppercase;
 `;
 
 const Title = styled.h2`
-  font-family: ${theme.typography.fontFamilyHeading};
   font-weight: ${theme.typography.fontWeightBold};
   color: ${theme.colors.textPrimary};
   font-size: 16px;
