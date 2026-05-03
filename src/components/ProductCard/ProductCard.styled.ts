@@ -80,7 +80,7 @@ const PromotionBadge = styled.span`
   position: absolute;
   top: 8px;
   right: 8px;
-  z-index: 100;
+  z-index: 50;
   width: 44px;
   height: 44px;
   display: flex;
