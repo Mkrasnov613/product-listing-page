@@ -3,7 +3,7 @@
 import styled from "styled-components";
 import { theme } from "@/theme";
 
-export const Overlay = styled.div`
+const Overlay = styled.div<{ isMobile: boolean }>`
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.55);
@@ -11,31 +11,33 @@ export const Overlay = styled.div`
   align-items: center;
   justify-content: center;
   z-index: 2000;
-  padding: ${theme.spacing.lg};
+  padding: ${({ isMobile }) => (isMobile ? "0px" : theme.spacing.lg)};
 `;
 
-export const Modal = styled.div`
+const Modal = styled.div<{ isMobile: boolean }>`
   position: relative;
   display: flex;
+  flex-direction: ${({ isMobile }) => (isMobile ? "column" : "row")};
   width: 100%;
   max-width: 860px;
-  max-height: 90vh;
+  max-height: ${({ isMobile }) => (isMobile ? "90vh%" : "90vh")};
   background: ${theme.colors.bg};
   border-radius: ${theme.borderRadius.lg};
   overflow: hidden;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
 `;
 
-export const ImageSection = styled.div`
+const ImageSection = styled.div`
   position: relative;
   flex: 0 0 45%;
   min-height: 520px;
 `;
 
-export const PromotionBadge = styled.span`
+const PromotionBadge = styled.span<{ isMobile: boolean }>`
   position: absolute;
+  ${({ isMobile }) =>
+    isMobile ? `left: ${theme.spacing.sm} ` : `right: ${theme.spacing.sm}`};
   top: ${theme.spacing.sm};
-  right: ${theme.spacing.sm};
   z-index: 1;
   width: 52px;
   height: 52px;
@@ -49,7 +51,7 @@ export const PromotionBadge = styled.span`
   border-radius: 50%;
 `;
 
-export const InfoSection = styled.div`
+const InfoSection = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -58,16 +60,15 @@ export const InfoSection = styled.div`
   overflow-y: auto;
 `;
 
-export const Brand = styled.span`
-  font-size: ${theme.typography.fontSizeSmall};
-  font-family: ${theme.typography.fontFamilyBody};
+const Brand = styled.span`
+  font-size: ${theme.typography.fontSizeMedium};
+  font-family: ${theme.typography.fontFamilyHeading};
   color: ${theme.colors.textMuted};
   text-transform: uppercase;
   letter-spacing: 0.8px;
 `;
 
-export const Title = styled.h2`
-  font-family: ${theme.typography.fontFamilyHeading};
+const Title = styled.h2`
   font-size: 28px;
   font-weight: ${theme.typography.fontWeightBold};
   color: ${theme.colors.textPrimary};
@@ -75,7 +76,7 @@ export const Title = styled.h2`
   margin: 0;
 `;
 
-export const Description = styled.p`
+const Description = styled.p`
   font-family: ${theme.typography.fontFamilyBody};
   font-size: ${theme.typography.fontSizeBase};
   color: ${theme.colors.textMuted};
@@ -84,13 +85,13 @@ export const Description = styled.p`
   flex: 1;
 `;
 
-export const PriceRow = styled.div`
+const PriceRow = styled.div`
   display: flex;
   align-items: baseline;
   gap: ${theme.spacing.sm};
 `;
 
-export const OriginalPrice = styled.span<{ hasDiscount: boolean }>`
+const OriginalPrice = styled.span<{ hasDiscount: boolean }>`
   font-size: 22px;
   font-weight: ${theme.typography.fontWeightBold};
   color: ${({ hasDiscount }) =>
@@ -99,13 +100,13 @@ export const OriginalPrice = styled.span<{ hasDiscount: boolean }>`
     hasDiscount ? "line-through" : "none"};
 `;
 
-export const DiscountedPrice = styled.span`
+const DiscountedPrice = styled.span`
   font-size: 26px;
   font-weight: ${theme.typography.fontWeightBold};
   color: ${theme.colors.accent};
 `;
 
-export const PromotionName = styled.span`
+const PromotionName = styled.span`
   font-size: ${theme.typography.fontSizeSmall};
   background: ${theme.colors.primary};
   color: ${theme.colors.highlight};
@@ -113,7 +114,7 @@ export const PromotionName = styled.span`
   border-radius: ${theme.borderRadius.sm};
 `;
 
-export const CloseButton = styled.button`
+const CloseButton = styled.button`
   position: absolute;
   top: ${theme.spacing.md};
   right: ${theme.spacing.md};
@@ -135,3 +136,44 @@ export const CloseButton = styled.button`
     background: ${theme.colors.bgDark};
   }
 `;
+
+const ModalFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 10px;
+`;
+
+const CTAButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${theme.colors.primary};
+  color: ${theme.colors.highlight};
+  padding: 10px 16px;
+  border: none;
+  gap: 4px;
+  font-weigth: ${theme.typography.fontWeightBold};
+  border-radius: ${theme.borderRadius.md};
+  cursor: pointer;
+`;
+
+export {
+  Overlay,
+  Modal,
+  ImageSection,
+  PromotionBadge,
+  InfoSection,
+  Brand,
+  Title,
+  Description,
+  PriceRow,
+  OriginalPrice,
+  DiscountedPrice,
+  PromotionName,
+  CloseButton,
+  CTAButton,
+  ModalFooter,
+};

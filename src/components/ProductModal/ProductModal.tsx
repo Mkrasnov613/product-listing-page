@@ -17,7 +17,13 @@ import {
   DiscountedPrice,
   PromotionName,
   CloseButton,
+  CTAButton,
+  ModalFooter,
 } from "./ProductModal.styled";
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { AddToCart } from "../icons/AddToCart/AddToCart";
+import { useCart } from "@/context/CartContext";
+import { useSnackbar } from "@/context/SnackbarContext";
 
 interface ProductModalProps {
   product: Product;
@@ -26,6 +32,15 @@ interface ProductModalProps {
 
 export const ProductModal = ({ product, onClose }: ProductModalProps) => {
   const { image, title, description, brandName, price, promotion } = product;
+  const cart = useCart();
+  const { showSnackbar } = useSnackbar();
+  const isMobile = useIsMobile();
+
+  const handleAddToCart = async () => {
+    await cart?.addToCart(product);
+    showSnackbar(`${title} added to cart`);
+    onClose();
+  };
 
   const discountedPrice = promotion
     ? Math.round(price * (1 - promotion.percentage / 100))
@@ -42,9 +57,11 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
   }, [onClose]);
 
   return (
-    <Overlay onClick={onClose}>
-      <Modal onClick={(e) => e.stopPropagation()}>
-        <CloseButton onClick={onClose} aria-label="Close">✕</CloseButton>
+    <Overlay onClick={onClose} isMobile={isMobile}>
+      <Modal onClick={(e) => e.stopPropagation()} isMobile={isMobile}>
+        <CloseButton onClick={onClose} aria-label="Close">
+          ✕
+        </CloseButton>
 
         <ImageSection>
           <Image
@@ -54,7 +71,9 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
             style={{ objectFit: "cover" }}
           />
           {promotion && (
-            <PromotionBadge>-{promotion.percentage}%</PromotionBadge>
+            <PromotionBadge isMobile={isMobile}>
+              -{promotion.percentage}%
+            </PromotionBadge>
           )}
         </ImageSection>
 
@@ -63,12 +82,18 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
           <Title>{title}</Title>
           <Description>{description}</Description>
 
-          <PriceRow>
-            <OriginalPrice hasDiscount={!!promotion}>${price}</OriginalPrice>
-            {discountedPrice && (
-              <DiscountedPrice>${discountedPrice}</DiscountedPrice>
-            )}
-          </PriceRow>
+          <ModalFooter>
+            <PriceRow>
+              <OriginalPrice hasDiscount={!!promotion}>${price}</OriginalPrice>
+              {discountedPrice && (
+                <DiscountedPrice>${discountedPrice}</DiscountedPrice>
+              )}
+            </PriceRow>
+
+            <CTAButton onClick={handleAddToCart}>
+              Add to cart <AddToCart width={24} height={24} />
+            </CTAButton>
+          </ModalFooter>
         </InfoSection>
       </Modal>
     </Overlay>

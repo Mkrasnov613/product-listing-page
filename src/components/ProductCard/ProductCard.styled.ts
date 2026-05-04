@@ -35,12 +35,12 @@ const Brand = styled.span`
   font-size: 12px;
   letter-spacing: 0.6px;
   color: ${theme.colors.textMuted};
+  font-family: ${theme.typography.fontFamilyHeading};
   text-transform: uppercase;
 `;
 
 const Title = styled.h2`
   font-weight: ${theme.typography.fontWeightBold};
-  font-family: ${theme.typography.fontFamilyHeading};
   color: ${theme.colors.textPrimary};
   font-size: 16px;
   margin-bottom: 6px;
