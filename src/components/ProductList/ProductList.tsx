@@ -12,21 +12,29 @@ interface ProductListProps {
   products: Product[];
 }
 
-const Layout = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+const Container = styled.div`
   max-width: 1100px;
   margin: 0 auto;
-  padding: ${theme.spacing.xl};
-  gap: ${theme.spacing.xl};
+  padding: 0 ${theme.spacing.xl};
+`;
+
+const Toolbar = styled.div`
+  position: sticky;
+  top: 0px;
+  z-index: 200;
+  background: ${theme.colors.bgDark};
+  display: flex;
+  justify-content: flex-end;
+  padding: ${theme.spacing.sm} 0;
 `;
 
 const Grid = styled.section`
-  flex: 1;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   gap: 20px 24px;
+  padding: ${theme.spacing.sm} 0 0;
 `;
 
 const Empty = styled.p`
@@ -42,9 +50,12 @@ export const ProductList = ({ products }: ProductListProps) => {
   const filtered = useMemo(() => {
     const query = filters.search.toLowerCase().trim();
     return products.filter((p) => {
+      const effectivePrice = p.promotion
+        ? Math.round(p.price * (1 - p.promotion.percentage / 100))
+        : p.price;
       if (query && !p.title.toLowerCase().includes(query) && !p.brandName.toLowerCase().includes(query)) return false;
-      if (filters.priceMin !== "" && p.price < Number(filters.priceMin)) return false;
-      if (filters.priceMax !== "" && p.price > Number(filters.priceMax)) return false;
+      if (filters.priceMin !== "" && effectivePrice < Number(filters.priceMin)) return false;
+      if (filters.priceMax !== "" && effectivePrice > Number(filters.priceMax)) return false;
       if (filters.onSaleOnly && !p.promotion) return false;
       return true;
     });
@@ -52,7 +63,11 @@ export const ProductList = ({ products }: ProductListProps) => {
 
   return (
     <>
-      <Layout>
+      <Container>
+        <Toolbar>
+          <FilterPanel filters={filters} onChange={setFilters} />
+        </Toolbar>
+
         <Grid>
           {filtered.length === 0 ? (
             <Empty>No products match the selected filters.</Empty>
@@ -67,9 +82,7 @@ export const ProductList = ({ products }: ProductListProps) => {
             ))
           )}
         </Grid>
-
-        <FilterPanel filters={filters} onChange={setFilters} />
-      </Layout>
+      </Container>
 
       {selected && (
         <ProductModal product={selected} onClose={() => setSelected(null)} />

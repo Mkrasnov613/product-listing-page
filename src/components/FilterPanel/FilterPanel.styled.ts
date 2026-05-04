@@ -3,106 +3,53 @@
 import styled from "styled-components";
 import { theme } from "@/theme";
 
-export const Panel = styled.aside`
-  width: 240px;
-  flex-shrink: 0;
+export const Wrapper = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
+export const ToggleBtn = styled.button`
   display: flex;
-  flex-direction: column;
-  gap: ${theme.spacing.lg};
+  align-items: center;
+  gap: ${theme.spacing.xs};
+  padding: ${theme.spacing.sm} ${theme.spacing.md};
   background: ${theme.colors.bg};
-  padding: ${theme.spacing.lg};
+  color: ${theme.colors.primary};
   border: 1px solid ${theme.colors.border};
   border-radius: ${theme.borderRadius.md};
-  position: sticky;
-  top: 104px;
-  max-height: calc(100vh - 120px);
-  overflow-y: auto;
-
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
-
-export const FilterButton = styled.button`
-  display: none;
-
-  @media (max-width: 768px) {
-    display: flex;
-    align-items: center;
-    gap: ${theme.spacing.xs};
-    position: fixed;
-    top: 96px;
-    right: ${theme.spacing.md};
-    z-index: 400;
-    padding: ${theme.spacing.xs} ${theme.spacing.md};
-    background: ${theme.colors.primary};
-    color: ${theme.colors.highlight};
-    border: none;
-    border-radius: 999px;
-    font-family: ${theme.typography.fontFamilyBody};
-    font-size: ${theme.typography.fontSizeBase};
-    font-weight: ${theme.typography.fontWeightSemibold};
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  }
-`;
-
-export const ModalOverlay = styled.div`
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 500;
-  padding: ${theme.spacing.lg};
-`;
-
-export const ModalBox = styled.div`
-  background: ${theme.colors.bg};
-  border-radius: ${theme.borderRadius.lg};
-  padding: ${theme.spacing.lg};
-  width: 100%;
-  max-width: 400px;
-  max-height: 85vh;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: ${theme.spacing.lg};
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
-`;
-
-export const ModalHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: ${theme.spacing.md};
-  border-bottom: 1px solid ${theme.colors.border};
-`;
-
-export const ModalTitle = styled.span`
-  font-family: ${theme.typography.fontFamilyHeading};
-  font-size: ${theme.typography.fontSizeMedium};
-  font-weight: ${theme.typography.fontWeightBold};
-  color: ${theme.colors.textPrimary};
-`;
-
-export const ModalCloseButton = styled.button`
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-  border: 1px solid ${theme.colors.border};
-  border-radius: 50%;
-  font-size: 15px;
-  color: ${theme.colors.textPrimary};
+  font-family: ${theme.typography.fontFamilyBody};
+  font-size: ${theme.typography.fontSizeBase};
+  font-weight: ${theme.typography.fontWeightSemibold};
   cursor: pointer;
+  white-space: nowrap;
 
   &:hover {
     background: ${theme.colors.bgDark};
   }
+`;
+
+export const ActiveDot = styled.span`
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: ${theme.colors.primary};
+  flex-shrink: 0;
+`;
+
+export const Popup = styled.div`
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 300;
+  min-width: 280px;
+  background: ${theme.colors.bg};
+  border: 1px solid ${theme.colors.border};
+  border-radius: ${theme.borderRadius.md};
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  padding: ${theme.spacing.lg};
+  display: flex;
+  flex-direction: column;
+  gap: ${theme.spacing.lg};
 `;
 
 export const SearchInput = styled.input`
