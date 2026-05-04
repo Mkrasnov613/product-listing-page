@@ -2,11 +2,11 @@
 
 import { theme } from "@/theme";
 import styled from "styled-components";
+import { altTextStyles } from "@/styles/mixins";
 
 const Card = styled.article`
   display: flex;
   flex-direction: column;
-
   height: 100%;
   width: 100%;
   border-radius: 8px;
@@ -14,6 +14,11 @@ const Card = styled.article`
   max-width: 234px;
   background: ${theme.colors.bg};
   box-shadow: ${theme.shadows.card};
+
+  @media (max-width: 768px) {
+    max-width: none;
+    border-radius: 6px;
+  }
 `;
 
 const ProductImage = styled.div`
@@ -21,6 +26,7 @@ const ProductImage = styled.div`
   width: 100%;
   aspect-ratio: 1 / 1;
   overflow: hidden;
+  ${altTextStyles}
 `;
 
 const Body = styled.div`
@@ -29,6 +35,11 @@ const Body = styled.div`
   gap: 8px;
   padding: 10px 10px 0px;
   flex: 1;
+
+  @media (max-width: 768px) {
+    gap: 4px;
+    padding: 8px 8px 0;
+  }
 `;
 
 const Brand = styled.span`
@@ -45,6 +56,11 @@ const Title = styled.h2`
   font-size: 16px;
   margin-bottom: 6px;
   flex: 1;
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
 `;
 
 const Footer = styled.div`
@@ -53,6 +69,10 @@ const Footer = styled.div`
   justify-content: space-between;
   gap: 8px;
   padding-bottom: ${theme.spacing.sm};
+
+  @media (max-width: 768px) {
+    padding-bottom: 6px;
+  }
 `;
 
 const PriceRow = styled.div`
@@ -68,12 +88,20 @@ const OriginalPrice = styled.span<{ hasDiscount: boolean }>`
     hasDiscount ? "line-through" : "none"};
   color: ${({ hasDiscount }) =>
     hasDiscount ? theme.colors.textMuted : theme.colors.textPrimary};
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
 `;
 
 const DiscountedPrice = styled.span`
   font-size: 16px;
   font-weight: 700;
   color: ${theme.colors.textPrimary};
+
+  @media (max-width: 768px) {
+    font-size: 13px;
+  }
 `;
 
 const PromotionBadge = styled.span`
@@ -91,6 +119,14 @@ const PromotionBadge = styled.span`
   color: ${theme.colors.highlight};
   background: ${theme.colors.primary};
   border-radius: 50%;
+
+  @media (max-width: 768px) {
+    width: 34px;
+    height: 34px;
+    font-size: 11px;
+    top: 6px;
+    right: 6px;
+  }
 `;
 
 export {

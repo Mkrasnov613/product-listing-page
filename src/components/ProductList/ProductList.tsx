@@ -29,18 +29,19 @@ const Toolbar = styled.div`
 `;
 
 const Grid = styled.section`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 234px));
   justify-content: center;
-  align-items: center;
-  gap: 20px 24px;
-  padding: ${theme.spacing.sm} 0 0;
-`;
+  max-width: 1240px;
+  gap: 20px 40px;
+  margin: 0 auto;
 
-const Empty = styled.p`
-  font-family: ${theme.typography.fontFamilyBody};
-  color: ${theme.colors.textMuted};
-  font-size: ${theme.typography.fontSizeMedium};
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 0 12px;
+    max-width: 100%;
+  }
 `;
 
 export const ProductList = ({ products }: ProductListProps) => {

@@ -1,4 +1,4 @@
-export const AddToCart = (props: any) => (
+export const AddToCartIcon = (props: any) => (
   <svg
     id="Layer_1"
     xmlns="http://www.w3.org/2000/svg"
