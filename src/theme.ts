@@ -1,4 +1,3 @@
-
 export const theme = {
   colors: {
     primary: "hsl(223 73% 35%)",

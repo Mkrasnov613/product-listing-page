@@ -11,13 +11,19 @@ interface ProductListProps {
 }
 
 const Grid = styled.section`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 234px));
   justify-content: center;
-  align-items: stretch;
-  max-width: 820px;
+  max-width: 1240px;
   gap: 20px 40px;
   margin: 0 auto;
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 0 12px;
+    max-width: 100%;
+  }
 `;
 
 export const ProductList = ({ products }: ProductListProps) => {
@@ -30,7 +36,6 @@ export const ProductList = ({ products }: ProductListProps) => {
           <ProductCard
             key={product.articleNumber}
             product={product}
-            onAddToCart={() => void 0}
             onSelect={() => setSelected(product)}
           />
         ))}

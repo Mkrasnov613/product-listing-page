@@ -2,6 +2,8 @@
 
 import styled from "styled-components";
 import { theme } from "@/theme";
+import { altTextStyles } from "@/styles/mixins";
+import { CloseButton as BaseCloseButton } from "@/components/ui/CloseButton";
 
 const Overlay = styled.div<{ isMobile: boolean }>`
   position: fixed;
@@ -20,7 +22,7 @@ const Modal = styled.div<{ isMobile: boolean }>`
   flex-direction: ${({ isMobile }) => (isMobile ? "column" : "row")};
   width: 100%;
   max-width: 860px;
-  max-height: ${({ isMobile }) => (isMobile ? "90vh%" : "90vh")};
+  max-height: 90vh;
   background: ${theme.colors.bg};
   border-radius: ${theme.borderRadius.lg};
   overflow: hidden;
@@ -31,6 +33,7 @@ const ImageSection = styled.div`
   position: relative;
   flex: 0 0 45%;
   min-height: 520px;
+  ${altTextStyles}
 `;
 
 const PromotionBadge = styled.span<{ isMobile: boolean }>`
@@ -47,7 +50,6 @@ const PromotionBadge = styled.span<{ isMobile: boolean }>`
   font-size: 13px;
   font-weight: ${theme.typography.fontWeightBold};
   background: ${theme.colors.primary};
-  color: ${theme.colors.highlight};
   border-radius: 50%;
 `;
 
@@ -114,29 +116,6 @@ const PromotionName = styled.span`
   border-radius: ${theme.borderRadius.sm};
 `;
 
-const CloseButton = styled.button`
-  position: absolute;
-  top: ${theme.spacing.md};
-  right: ${theme.spacing.md};
-  z-index: 10;
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: ${theme.colors.bg};
-  border: 1px solid ${theme.colors.border};
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 18px;
-  color: ${theme.colors.textPrimary};
-  line-height: 1;
-
-  &:hover {
-    background: ${theme.colors.bgDark};
-  }
-`;
-
 const ModalFooter = styled.div`
   display: flex;
   justify-content: space-between;
@@ -150,14 +129,18 @@ const CTAButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: ${theme.colors.primary};
-  color: ${theme.colors.highlight};
+  background-color: ${theme.colors.bgDark};
+  color: ${theme.colors.primary};
   padding: 10px 16px;
   border: none;
   gap: 4px;
+  border: 1px solid ${theme.colors.border};
   font-weigth: ${theme.typography.fontWeightBold};
   border-radius: ${theme.borderRadius.md};
   cursor: pointer;
+
+  &:hover {
+  background-color: ${theme.colors.bg}
 `;
 
 export {
@@ -173,7 +156,6 @@ export {
   OriginalPrice,
   DiscountedPrice,
   PromotionName,
-  CloseButton,
   CTAButton,
   ModalFooter,
 };

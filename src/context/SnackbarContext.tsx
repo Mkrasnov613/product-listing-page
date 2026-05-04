@@ -23,14 +23,14 @@ const slideUp = keyframes`
 
 const Toast = styled.div`
   position: fixed;
-  top: 32px;
+  top: 64px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;
   padding: ${theme.spacing.sm} ${theme.spacing.xl};
-  background: ${theme.colors.highlight};
-  color: ${theme.colors.textSecondary};
-  border-radius: 999px;
+  background: ${theme.colors.bgDark};
+  color: ${theme.colors.primary};
+  border-radius: ${theme.borderRadius.md};
   font-family: ${theme.typography.fontFamilyBody};
   font-size: ${theme.typography.fontSizeBase};
   font-weight: ${theme.typography.fontWeightSemibold};

@@ -18,11 +18,10 @@ import {
 
 interface ProductCardProps {
   product: Product;
-  onAddToCart: () => void;
   onSelect: () => void;
 }
 
-export const ProductCard = ({ product, onAddToCart, onSelect }: ProductCardProps) => {
+export const ProductCard = ({ product, onSelect }: ProductCardProps) => {
   const { image, title, brandName, price, promotion } = product;
 
   const discountedPrice = promotion
