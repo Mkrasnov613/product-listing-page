@@ -2,6 +2,8 @@
 
 A responsive product listing page built as a front-end project. It fetches products from an external API and presents them with filtering, a product detail modal, and a shopping cart.
 
+# Vercel link: https://product-listing-page-rust.vercel.app/
+
 ---
 
 ## Tech Stack
