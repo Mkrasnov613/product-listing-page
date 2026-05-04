@@ -11,13 +11,14 @@ import {
   Filters,
   DEFAULT_FILTERS,
 } from "@/components/FilterPanel/FilterPanel";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface ProductListProps {
   products: Product[];
 }
 
 const Container = styled.div`
-  max-width: 1100px;
+  max-width: 1620px;
   margin: 0 auto;
   padding: 0 ${theme.spacing.xl};
 `;
@@ -28,14 +29,17 @@ const Empty = styled.p`
   font-size: ${theme.typography.fontSizeMedium};
 `;
 
-const Toolbar = styled.div`
-  position: sticky;
-  top: 0px;
+const Toolbar = styled.div<{ isMobile: boolean }>`
   z-index: 200;
   background: ${theme.colors.bgDark};
   display: flex;
-  justify-content: flex-end;
-  padding: ${theme.spacing.sm} 0;
+  align-items: center;
+  padding-bottom: ${theme.spacing.md};
+  padding-right: 72px;
+
+  @media (max-width: 768px) {
+    padding-right: 0px;
+  }
 `;
 
 const Grid = styled.section`
@@ -57,7 +61,7 @@ const Grid = styled.section`
 export const ProductList = ({ products }: ProductListProps) => {
   const [selected, setSelected] = useState<Product | null>(null);
   const [filters, setFilters] = useState<Filters>(DEFAULT_FILTERS);
-
+  const isMobile = useIsMobile();
   const filtered = useMemo(() => {
     const query = filters.search.toLowerCase().trim();
     return products.filter((p) => {
@@ -82,7 +86,7 @@ export const ProductList = ({ products }: ProductListProps) => {
   return (
     <>
       <Container>
-        <Toolbar>
+        <Toolbar isMobile={isMobile}>
           <FilterPanel filters={filters} onChange={setFilters} />
         </Toolbar>
 
