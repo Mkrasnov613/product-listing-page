@@ -6,6 +6,7 @@ const HeaderWrapper = styled.header`
   top: 0;
   left: 0;
   width: 100%;
+  padding: 16px;
   height: 80px;
   background: ${theme.colors.bg};
   box-shadow: ${theme.shadows.header};
@@ -15,21 +16,10 @@ const HeaderWrapper = styled.header`
   z-index: 1000;
 `;
 
-const LogoImage = styled.div`
+const LogoImage = styled.div<{ isMobile: boolean }>`
   position: relative;
-  width: 200px;
+  width: ${({ isMobile }) => (isMobile ? "120px" : "160px")};
   height: 48px;
-`;
-
-const Inner = styled.div`
-  max-width: 1280px;
-  height: 100%;
-  width: 100%;
-  margin: 0 auto;
-  padding: 0 ${theme.spacing.xl};
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
 `;
 
 const Logo = styled.div`
@@ -77,4 +67,4 @@ const CartCount = styled.span`
   border-radius: 50%;
 `;
 
-export { HeaderWrapper, Inner, Logo, LogoImage, CartButton, CartCount };
+export { HeaderWrapper, Logo, LogoImage, CartButton, CartCount };

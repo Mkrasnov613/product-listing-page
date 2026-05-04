@@ -1,6 +1,6 @@
 import { fetchProducts } from "@/services/productsApi";
 import { ProductList } from "@/components/ProductList/ProductList";
-import { Header } from "@/components/Header/Header";
+import { WelcomeSection } from "@/components/WelcomeSection/WelcomeSection";
 
 export default async function Home() {
   const data = await fetchProducts();
@@ -15,6 +15,7 @@ export default async function Home() {
 
   return (
     <>
+      <WelcomeSection />
       <ProductList products={data.products} />
     </>
   );

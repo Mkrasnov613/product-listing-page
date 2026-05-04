@@ -22,7 +22,7 @@ export default function RootLayout({
           <CartProvider>
             <SnackbarProvider>
               <Header />
-              <main style={{ paddingTop: "96px" }}>{children}</main>
+              <main style={{ paddingTop: "64px" }}>{children}</main>
             </SnackbarProvider>
           </CartProvider>
         </StyledComponentsRegistry>
