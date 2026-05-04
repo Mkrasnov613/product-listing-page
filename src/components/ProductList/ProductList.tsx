@@ -24,6 +24,10 @@ const Container = styled.div`
 `;
 
 const Empty = styled.p`
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: ${theme.typography.fontFamilyBody};
   color: ${theme.colors.textMuted};
   font-size: ${theme.typography.fontSizeMedium};
@@ -90,19 +94,19 @@ export const ProductList = ({ products }: ProductListProps) => {
           <FilterPanel filters={filters} onChange={setFilters} />
         </Toolbar>
 
-        <Grid>
-          {filtered.length === 0 ? (
-            <Empty>No products match the selected filters.</Empty>
-          ) : (
-            filtered.map((product) => (
+        {filtered.length === 0 ? (
+          <Empty>No products match the selected filters.</Empty>
+        ) : (
+          <Grid>
+            {filtered.map((product) => (
               <ProductCard
                 key={product.articleNumber}
                 product={product}
                 onSelect={() => setSelected(product)}
               />
-            ))
-          )}
-        </Grid>
+            ))}
+          </Grid>
+        )}
       </Container>
 
       {selected && (
