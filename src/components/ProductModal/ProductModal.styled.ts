@@ -34,6 +34,12 @@ const ImageSection = styled.div`
   flex: 0 0 45%;
   min-height: 520px;
   ${altTextStyles}
+
+  @media (max-width: 425px) {
+    flex: none;
+    height: 240px;
+    min-height: unset;
+  }
 `;
 
 const InfoSection = styled.div`
