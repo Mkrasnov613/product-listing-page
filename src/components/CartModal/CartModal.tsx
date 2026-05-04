@@ -8,7 +8,6 @@ import {
   Drawer,
   DrawerHeader,
   DrawerTitle,
-  CloseButton,
   ItemList,
   CartItem,
   ItemImage,
@@ -16,6 +15,9 @@ import {
   ItemBrand,
   ItemTitle,
   ItemPrice,
+  QuantityControls,
+  QuantityButton,
+  QuantityCount,
   RemoveButton,
   EmptyMessage,
   DrawerFooter,
@@ -23,7 +25,10 @@ import {
   TotalLabel,
   TotalPrice,
   ClearButton,
+  PriceRow,
 } from "./CartModal.styled";
+import { CloseButton } from "../ui/CloseButton";
+import { DeleteIcon } from "../icons/DeleteIcon/DeleteIcon";
 
 interface CartModalProps {
   onClose: () => void;
@@ -31,7 +36,8 @@ interface CartModalProps {
 
 export const CartModal = ({ onClose }: CartModalProps) => {
   const cart = useCart()!;
-  const { state, removeFromCart, clearCart } = cart;
+  const { state, addToCart, decrementQuantity, removeFromCart, clearCart } =
+    cart;
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
@@ -43,11 +49,11 @@ export const CartModal = ({ onClose }: CartModalProps) => {
     };
   }, [onClose]);
 
-  const total = state.items.reduce((sum, item) => {
-    const finalPrice = item.promotion
-      ? Math.round(item.price * (1 - item.promotion.percentage / 100))
-      : item.price;
-    return sum + finalPrice;
+  const total = state.items.reduce((sum, { product, quantity }) => {
+    const unitPrice = product.promotion
+      ? Math.round(product.price * (1 - product.promotion.percentage / 100))
+      : product.price;
+    return sum + unitPrice * quantity;
   }, 0);
 
   return (
@@ -55,37 +61,61 @@ export const CartModal = ({ onClose }: CartModalProps) => {
       <Drawer onClick={(e) => e.stopPropagation()}>
         <DrawerHeader>
           <DrawerTitle>Cart ({state.count})</DrawerTitle>
-          <CloseButton onClick={onClose} aria-label="Close cart">✕</CloseButton>
+          <CloseButton onClick={onClose} aria-label="Close cart" />
         </DrawerHeader>
 
         <ItemList>
           {state.items.length === 0 ? (
             <EmptyMessage>Your cart is empty.</EmptyMessage>
           ) : (
-            state.items.map((item, index) => {
-              const finalPrice = item.promotion
-                ? Math.round(item.price * (1 - item.promotion.percentage / 100))
-                : item.price;
+            state.items.map(({ product, quantity }) => {
+              const unitPrice = product.promotion
+                ? Math.round(
+                    product.price * (1 - product.promotion.percentage / 100),
+                  )
+                : product.price;
               return (
-                <CartItem key={`${item.articleNumber}-${index}`}>
+                <CartItem key={product.articleNumber}>
                   <ItemImage>
                     <Image
-                      src={item.image.url}
-                      alt={item.image.altText}
+                      src={product.image.url}
+                      alt={product.image.altText}
                       fill
                       style={{ objectFit: "cover" }}
                     />
                   </ItemImage>
                   <ItemInfo>
-                    <ItemBrand>{item.brandName}</ItemBrand>
-                    <ItemTitle>{item.title}</ItemTitle>
-                    <ItemPrice>${finalPrice}</ItemPrice>
+                    <ItemBrand>{product.brandName}</ItemBrand>
+                    <ItemTitle>{product.title}</ItemTitle>
+
+                    <PriceRow>
+                      <ItemPrice>${unitPrice}</ItemPrice>
+                      <QuantityControls>
+                        <QuantityButton
+                          disabled={quantity <= 1}
+                          onClick={() =>
+                            decrementQuantity(product.articleNumber)
+                          }
+                          aria-label="Decrease quantity"
+                        >
+                          −
+                        </QuantityButton>
+                        <QuantityCount>{quantity}</QuantityCount>
+                        <QuantityButton
+                          onClick={() => addToCart(product)}
+                          aria-label="Increase quantity"
+                        >
+                          +
+                        </QuantityButton>
+                      </QuantityControls>
+                    </PriceRow>
                   </ItemInfo>
+
                   <RemoveButton
-                    onClick={() => removeFromCart(item.articleNumber)}
+                    onClick={() => removeFromCart(product.articleNumber)}
                     aria-label="Remove item"
                   >
-                    ✕
+                    <DeleteIcon width={18} height={18} />
                   </RemoveButton>
                 </CartItem>
               );

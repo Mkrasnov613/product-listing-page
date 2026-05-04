@@ -57,14 +57,14 @@ const CartButton = styled.button`
 
   &:hover {
     background: ${theme.colors.bgDark};
-    border: 1px solid ${theme.colors.border}
   }
 `;
 
 const CartCount = styled.span`
   position: absolute;
-  top: 2px;
-  right: 2px;
+  box-sizing: border-box;
+  top: 3px;
+  right: 3px;
   width: 16px;
   height: 16px;
   display: flex;

@@ -16,14 +16,14 @@ import {
   OriginalPrice,
   DiscountedPrice,
   PromotionName,
-  CloseButton,
   CTAButton,
   ModalFooter,
 } from "./ProductModal.styled";
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { AddToCart } from "../icons/AddToCart/AddToCart";
+import { AddToCartIcon } from "../icons/AddToCartIcon/AddToCartIcon";
 import { useCart } from "@/context/CartContext";
 import { useSnackbar } from "@/context/SnackbarContext";
+import { CloseButton } from "../ui/CloseButton";
 
 interface ProductModalProps {
   product: Product;
@@ -59,9 +59,7 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
   return (
     <Overlay onClick={onClose} isMobile={isMobile}>
       <Modal onClick={(e) => e.stopPropagation()} isMobile={isMobile}>
-        <CloseButton onClick={onClose} aria-label="Close">
-          ✕
-        </CloseButton>
+        <CloseButton absolute onClick={onClose} aria-label="Close" />
 
         <ImageSection>
           <Image
@@ -91,7 +89,7 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
             </PriceRow>
 
             <CTAButton onClick={handleAddToCart}>
-              Add to cart <AddToCart width={24} height={24} />
+              Add to cart <AddToCartIcon width={24} height={24} />
             </CTAButton>
           </ModalFooter>
         </InfoSection>
