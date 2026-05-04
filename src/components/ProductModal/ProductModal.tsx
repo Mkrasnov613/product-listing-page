@@ -68,18 +68,19 @@ export const ProductModal = ({ product, onClose }: ProductModalProps) => {
             fill
             style={{ objectFit: "cover" }}
           />
-          {promotion && (
-            <PromotionBadge isMobile={isMobile}>
-              -{promotion.percentage}%
-            </PromotionBadge>
-          )}
         </ImageSection>
 
         <InfoSection>
           <Brand>{brandName}</Brand>
           <Title>{title}</Title>
+
           <Description>{description}</Description>
 
+          {promotion && (
+            <PromotionName>
+              -{promotion.percentage}% {promotion.name}
+            </PromotionName>
+          )}
           <ModalFooter>
             <PriceRow>
               <OriginalPrice hasDiscount={!!promotion}>${price}</OriginalPrice>

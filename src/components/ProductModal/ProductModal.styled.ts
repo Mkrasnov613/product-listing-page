@@ -36,23 +36,6 @@ const ImageSection = styled.div`
   ${altTextStyles}
 `;
 
-const PromotionBadge = styled.span<{ isMobile: boolean }>`
-  position: absolute;
-  ${({ isMobile }) =>
-    isMobile ? `left: ${theme.spacing.sm} ` : `right: ${theme.spacing.sm}`};
-  top: ${theme.spacing.sm};
-  z-index: 1;
-  width: 52px;
-  height: 52px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  font-weight: ${theme.typography.fontWeightBold};
-  background: ${theme.colors.primary};
-  border-radius: 50%;
-`;
-
 const InfoSection = styled.div`
   flex: 1;
   display: flex;
@@ -112,8 +95,9 @@ const PromotionName = styled.span`
   font-size: ${theme.typography.fontSizeSmall};
   background: ${theme.colors.primary};
   color: ${theme.colors.highlight};
-  padding: 2px 8px;
-  border-radius: ${theme.borderRadius.sm};
+  padding: 8px 12px;
+  max-width: 160px;
+  border-radius: ${theme.borderRadius.md};
 `;
 
 const ModalFooter = styled.div`
@@ -122,7 +106,7 @@ const ModalFooter = styled.div`
   align-items: center;
   width: 100%;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 10px;  
 `;
 
 const CTAButton = styled.button`
@@ -147,7 +131,6 @@ export {
   Overlay,
   Modal,
   ImageSection,
-  PromotionBadge,
   InfoSection,
   Brand,
   Title,
