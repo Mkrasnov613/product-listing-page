@@ -5,18 +5,14 @@ import { WelcomeSection } from "@/components/WelcomeSection/WelcomeSection";
 export default async function Home() {
   const data = await fetchProducts();
 
-  if (!data || !data.products) {
-    return (
-      <main>
-        <p>Failed to load Products</p>
-      </main>
-    );
-  }
-
   return (
     <>
       <WelcomeSection />
-      <ProductList products={data.products} />
+      {!data || !data.products ? (
+        <p>Failed to load Products</p>
+      ) : (
+        <ProductList products={data.products} />
+      )}
     </>
   );
 }
