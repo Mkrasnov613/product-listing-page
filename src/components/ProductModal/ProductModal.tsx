@@ -7,7 +7,6 @@ import {
   Overlay,
   Modal,
   ImageSection,
-  PromotionBadge,
   InfoSection,
   Brand,
   Title,
