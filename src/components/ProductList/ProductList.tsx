@@ -6,7 +6,11 @@ import { Product } from "@/types/api";
 import { theme } from "@/theme";
 import { ProductCard } from "@/components/ProductCard/ProductCard";
 import { ProductModal } from "@/components/ProductModal/ProductModal";
-import { FilterPanel, Filters, DEFAULT_FILTERS } from "@/components/FilterPanel/FilterPanel";
+import {
+  FilterPanel,
+  Filters,
+  DEFAULT_FILTERS,
+} from "@/components/FilterPanel/FilterPanel";
 
 interface ProductListProps {
   products: Product[];
@@ -16,6 +20,12 @@ const Container = styled.div`
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 ${theme.spacing.xl};
+`;
+
+const Empty = styled.p`
+  font-family: ${theme.typography.fontFamilyBody};
+  color: ${theme.colors.textMuted};
+  font-size: ${theme.typography.fontSizeMedium};
 `;
 
 const Toolbar = styled.div`
@@ -54,9 +64,16 @@ export const ProductList = ({ products }: ProductListProps) => {
       const effectivePrice = p.promotion
         ? Math.round(p.price * (1 - p.promotion.percentage / 100))
         : p.price;
-      if (query && !p.title.toLowerCase().includes(query) && !p.brandName.toLowerCase().includes(query)) return false;
-      if (filters.priceMin !== "" && effectivePrice < Number(filters.priceMin)) return false;
-      if (filters.priceMax !== "" && effectivePrice > Number(filters.priceMax)) return false;
+      if (
+        query &&
+        !p.title.toLowerCase().includes(query) &&
+        !p.brandName.toLowerCase().includes(query)
+      )
+        return false;
+      if (filters.priceMin !== "" && effectivePrice < Number(filters.priceMin))
+        return false;
+      if (filters.priceMax !== "" && effectivePrice > Number(filters.priceMax))
+        return false;
       if (filters.onSaleOnly && !p.promotion) return false;
       return true;
     });
@@ -77,7 +94,6 @@ export const ProductList = ({ products }: ProductListProps) => {
               <ProductCard
                 key={product.articleNumber}
                 product={product}
-                onAddToCart={() => void 0}
                 onSelect={() => setSelected(product)}
               />
             ))
