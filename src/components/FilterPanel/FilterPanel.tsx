@@ -1,21 +1,19 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import {
-  Wrapper,
-  ToggleBtn,
-  ActiveDot,
-  Popup,
+  FilterBar,
   SearchInput,
-  Section,
-  SectionTitle,
   PriceInputs,
   PriceInput,
   Separator,
   ToggleLabel,
+  ActiveDot,
   ClearButton,
+  HideButton,
+  ShowButton,
 } from "./FilterPanel.styled";
-import { Filters } from "../icons/Filters/Filters";
+import { Filters as FiltersIcon } from "../icons/Filters/Filters";
 
 export interface Filters {
   search: string;
@@ -40,83 +38,62 @@ const isActive = (f: Filters) =>
   f.search !== "" || f.priceMin !== "" || f.priceMax !== "" || f.onSaleOnly;
 
 export const FilterPanel = ({ filters, onChange }: FilterPanelProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const [isOpen, setIsOpen] = useState(true);
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        wrapperRef.current &&
-        !wrapperRef.current.contains(e.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-    if (isOpen) document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isOpen]);
+  if (!isOpen) {
+    return (
+      <ShowButton onClick={() => setIsOpen(true)}>
+        <FiltersIcon />
+        Filters {isActive(filters) && <ActiveDot />}
+      </ShowButton>
+    );
+  }
 
   return (
-    <Wrapper ref={wrapperRef}>
-      <ToggleBtn onClick={() => setIsOpen((v) => !v)}>
-        {isActive(filters) && <ActiveDot />}
-        <Filters />
-        Filters
-      </ToggleBtn>
+    <FilterBar>
+      <SearchInput
+        type="search"
+        placeholder="Search products..."
+        value={filters.search}
+        onChange={(e) => onChange({ ...filters, search: e.target.value })}
+      />
 
-      {isOpen && (
-        <Popup>
-          <SearchInput
-            type="search"
-            placeholder="Search products..."
-            value={filters.search}
-            onChange={(e) => onChange({ ...filters, search: e.target.value })}
-          />
+      <PriceInputs>
+        <PriceInput
+          type="number"
+          min={0}
+          placeholder="Min"
+          value={filters.priceMin}
+          onChange={(e) => onChange({ ...filters, priceMin: e.target.value })}
+        />
+        <Separator>—</Separator>
+        <PriceInput
+          type="number"
+          min={0}
+          placeholder="Max"
+          value={filters.priceMax}
+          onChange={(e) => onChange({ ...filters, priceMax: e.target.value })}
+        />
+      </PriceInputs>
 
-          <Section>
-            <SectionTitle>Price</SectionTitle>
-            <PriceInputs>
-              <PriceInput
-                type="number"
-                min={0}
-                placeholder="Min"
-                value={filters.priceMin}
-                onChange={(e) =>
-                  onChange({ ...filters, priceMin: e.target.value })
-                }
-              />
-              <Separator>—</Separator>
-              <PriceInput
-                type="number"
-                min={0}
-                placeholder="Max"
-                value={filters.priceMax}
-                onChange={(e) =>
-                  onChange({ ...filters, priceMax: e.target.value })
-                }
-              />
-            </PriceInputs>
-          </Section>
+      <ToggleLabel>
+        <input
+          type="checkbox"
+          checked={filters.onSaleOnly}
+          onChange={(e) =>
+            onChange({ ...filters, onSaleOnly: e.target.checked })
+          }
+        />
+        On sale only
+      </ToggleLabel>
 
-          <Section>
-            <SectionTitle>Promotion</SectionTitle>
-            <ToggleLabel>
-              <input
-                type="checkbox"
-                checked={filters.onSaleOnly}
-                onChange={(e) =>
-                  onChange({ ...filters, onSaleOnly: e.target.checked })
-                }
-              />
-              On sale only
-            </ToggleLabel>
-          </Section>
-
-          <ClearButton onClick={() => onChange(DEFAULT_FILTERS)}>
-            Clear filters
-          </ClearButton>
-        </Popup>
+      {isActive(filters) && (
+        <ClearButton onClick={() => onChange(DEFAULT_FILTERS)}>
+          Clear
+        </ClearButton>
       )}
-    </Wrapper>
+
+      <HideButton onClick={() => setIsOpen(false)}>Hide filters</HideButton>
+    </FilterBar>
   );
 };

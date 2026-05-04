@@ -17,7 +17,7 @@ interface ProductListProps {
 }
 
 const Container = styled.div`
-  max-width: 1100px;
+  max-width: 1670px;
   margin: 0 auto;
   padding: 0 ${theme.spacing.xl};
 `;
@@ -34,7 +34,7 @@ const Toolbar = styled.div`
   z-index: 200;
   background: ${theme.colors.bgDark};
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
   padding: ${theme.spacing.sm} 0;
 `;
 
@@ -42,7 +42,7 @@ const Grid = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 234px));
   justify-content: center;
-  max-width: 1240px;
+  max-width: 1670px;
   gap: 20px 40px;
   margin: 0 auto;
 

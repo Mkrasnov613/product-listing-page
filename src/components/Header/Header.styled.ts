@@ -22,7 +22,6 @@ const LogoImage = styled.div`
 `;
 
 const Inner = styled.div`
-  max-width: 1280px;
   height: 100%;
   width: 100%;
   margin: 0 auto;

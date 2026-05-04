@@ -3,64 +3,25 @@
 import styled from "styled-components";
 import { theme } from "@/theme";
 
-export const Wrapper = styled.div`
-  position: relative;
-  display: inline-block;
-`;
-
-export const ToggleBtn = styled.button`
+export const FilterBar = styled.div`
   display: flex;
   align-items: center;
-  gap: ${theme.spacing.xs};
-  padding: ${theme.spacing.sm} ${theme.spacing.md};
-  background: ${theme.colors.bg};
-  color: ${theme.colors.primary};
-  border: 1px solid ${theme.colors.border};
-  border-radius: ${theme.borderRadius.md};
-  font-family: ${theme.typography.fontFamilyBody};
-  font-size: ${theme.typography.fontSizeBase};
-  font-weight: ${theme.typography.fontWeightSemibold};
-  cursor: pointer;
-  white-space: nowrap;
-
-  &:hover {
-    background: ${theme.colors.bgDark};
-  }
-`;
-
-export const ActiveDot = styled.span`
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: ${theme.colors.primary};
-  flex-shrink: 0;
-`;
-
-export const Popup = styled.div`
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  z-index: 300;
-  min-width: 280px;
-  background: ${theme.colors.bg};
-  border: 1px solid ${theme.colors.border};
-  border-radius: ${theme.borderRadius.md};
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-  padding: ${theme.spacing.lg};
-  display: flex;
-  flex-direction: column;
-  gap: ${theme.spacing.lg};
+  gap: ${theme.spacing.sm};
+  width: 100%;
+  flex-wrap: wrap;
 `;
 
 export const SearchInput = styled.input`
-  width: 100%;
-  padding: ${theme.spacing.sm} ${theme.spacing.md};
+  flex: 1;
+  min-width: 160px;
+  padding: ${theme.spacing.xs} ${theme.spacing.md};
   border: 1px solid ${theme.colors.border};
   border-radius: ${theme.borderRadius.md};
   font-family: ${theme.typography.fontFamilyBody};
   font-size: ${theme.typography.fontSizeBase};
   color: ${theme.colors.textPrimary};
   background: ${theme.colors.bg};
+  height: 34px;
 
   &::placeholder {
     color: ${theme.colors.textMuted};
@@ -72,32 +33,19 @@ export const SearchInput = styled.input`
   }
 `;
 
-export const Section = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${theme.spacing.sm};
-`;
-
-export const SectionTitle = styled.h3`
-  font-family: ${theme.typography.fontFamilyHeading};
-  font-size: ${theme.typography.fontSizeBase};
-  font-weight: ${theme.typography.fontWeightBold};
-  color: ${theme.colors.textPrimary};
-  padding-bottom: ${theme.spacing.xs};
-  border-bottom: 1px solid ${theme.colors.border};
-`;
-
 export const PriceInputs = styled.div`
   display: flex;
   align-items: center;
-  gap: ${theme.spacing.sm};
+  gap: ${theme.spacing.xs};
+  flex-shrink: 0;
 `;
 
 export const PriceInput = styled.input`
-  width: 80px;
+  width: 72px;
+  height: 34px;
   padding: ${theme.spacing.xs} ${theme.spacing.sm};
   border: 1px solid ${theme.colors.border};
-  border-radius: ${theme.borderRadius.sm};
+  border-radius: ${theme.borderRadius.md};
   font-family: ${theme.typography.fontFamilyBody};
   font-size: ${theme.typography.fontSizeBase};
   color: ${theme.colors.textPrimary};
@@ -112,16 +60,19 @@ export const PriceInput = styled.input`
 export const Separator = styled.span`
   color: ${theme.colors.textMuted};
   font-size: ${theme.typography.fontSizeBase};
+  flex-shrink: 0;
 `;
 
 export const ToggleLabel = styled.label`
   display: flex;
   align-items: center;
-  gap: ${theme.spacing.sm};
+  gap: ${theme.spacing.xs};
   font-family: ${theme.typography.fontFamilyBody};
   font-size: ${theme.typography.fontSizeBase};
   color: ${theme.colors.textPrimary};
   cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
 
   input[type="checkbox"] {
     accent-color: ${theme.colors.primary};
@@ -131,18 +82,56 @@ export const ToggleLabel = styled.label`
   }
 `;
 
+export const ActiveDot = styled.span`
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: ${theme.colors.primary};
+  flex-shrink: 0;
+`;
+
 export const ClearButton = styled.button`
-  padding: ${theme.spacing.sm} ${theme.spacing.md};
+  height: 34px;
+  padding: 0 ${theme.spacing.md};
   background: none;
   border: 1px solid ${theme.colors.border};
-  border-radius: ${theme.borderRadius.sm};
+  border-radius: ${theme.borderRadius.md};
   font-family: ${theme.typography.fontFamilyBody};
   font-size: ${theme.typography.fontSizeBase};
   color: ${theme.colors.textMuted};
   cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
 
   &:hover {
     border-color: ${theme.colors.primary};
     color: ${theme.colors.primary};
   }
+`;
+
+export const HideButton = styled.button`
+  height: 34px;
+  padding: 0 ${theme.spacing.md};
+  background: none;
+  border: 1px solid ${theme.colors.border};
+  border-radius: ${theme.borderRadius.md};
+  font-family: ${theme.typography.fontFamilyBody};
+  font-size: ${theme.typography.fontSizeBase};
+  font-weight: ${theme.typography.fontWeightSemibold};
+  color: ${theme.colors.primary};
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  &:hover {
+    background: ${theme.colors.bgDark};
+  }
+`;
+
+export const ShowButton = styled(HideButton)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  margin-left: auto;
 `;
